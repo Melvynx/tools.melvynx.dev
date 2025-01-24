@@ -75,6 +75,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  body,
+  html {
+    height: 100%;
+  }
 }
 
 @layer components {
@@ -82,5 +86,7 @@ body {
     max-width: 1000px;
     padding: 16px 0px;
     margin: 0 auto;
+    margin-top: 32px;
+    min-height: 100%;
   }
 }
