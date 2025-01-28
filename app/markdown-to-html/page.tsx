@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { MarkdownConverter } from "./MarkdownConverter";
+import { MarkdownConverter } from "./markdown-converter";
 
 export const metadata: Metadata = {
   title: "Markdown to HTML Converter",
