@@ -167,3 +167,16 @@ You're commit must always follow commitizen convention.
 </rules>
 
 </commit>
+
+<shadcn-ui>
+- Use shadcn/ui for components.
+
+To install new components, use the following command :
+
+```bash
+pnpm dlx shadcn@latest add name-of-the-component
+```
+
+name-of-the-component is the name of the component you want to install. Ex : button, card, etc.
+
+</shadcn-ui>

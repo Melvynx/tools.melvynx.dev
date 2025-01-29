@@ -18,12 +18,16 @@ import { useLocalStorage } from "react-use";
 
 const STORAGE_KEY = "markdown-converter-settings";
 
+type TabValue = "preview" | "code";
+
 interface MarkdownSettings {
   escapeHtml: boolean;
+  activeTab: TabValue;
 }
 
 const DEFAULT_SETTINGS: MarkdownSettings = {
   escapeHtml: true,
+  activeTab: "preview",
 };
 
 function processMarkdown(markdown: string, settings: MarkdownSettings): string {
@@ -57,24 +61,37 @@ export function MarkdownConverter() {
 
   const handleSettingsChange = (escapeHtml: boolean) => {
     setSettings((prev) => ({
+      ...DEFAULT_SETTINGS,
       ...prev,
       escapeHtml,
     }));
   };
 
+  const handleTabChange = (tab: TabValue) => {
+    setSettings((prev) => ({
+      ...DEFAULT_SETTINGS,
+      ...prev,
+      activeTab: tab,
+    }));
+  };
+
   return (
     <div className="grid grid-cols-2 gap-4">
-      <div>
-        <h2 className="text-lg font-semibold mb-2">Markdown</h2>
+      <div className="flex flex-col">
+        <div className="h-9 mb-2">
+          <h2 className="text-lg font-semibold">Markdown</h2>
+        </div>
         <Textarea
           value={markdown}
-          onChange={(e) => setMarkdown(e.target.value)}
-          className="h-[500px] font-mono"
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            setMarkdown(e.target.value)
+          }
+          className="flex-1 min-h-[500px] font-mono resize-none"
           placeholder="Enter your markdown here..."
         />
       </div>
-      <div>
-        <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col">
+        <div className="h-9 mb-2 flex items-center justify-between">
           <h2 className="text-lg font-semibold">Output</h2>
           <div className="flex items-center gap-2">
             <Dialog>
@@ -123,29 +140,37 @@ export function MarkdownConverter() {
             </button>
           </div>
         </div>
-        <Tabs defaultValue="preview" className="w-full">
-          <TabsList className="w-full">
-            <TabsTrigger value="preview" className="flex-1">
-              Preview
-            </TabsTrigger>
-            <TabsTrigger value="code" className="flex-1">
-              HTML Code
-            </TabsTrigger>
-          </TabsList>
-          <TabsContent value="preview">
-            <div
-              className="prose prose-slate dark:prose-invert max-w-none p-4 border rounded-md h-[500px] overflow-auto bg-white dark:bg-slate-900"
-              dangerouslySetInnerHTML={{ __html: processedHtml }}
-            />
-          </TabsContent>
-          <TabsContent value="code">
-            <Textarea
-              value={processedHtml}
-              readOnly
-              className="h-[500px] font-mono"
-            />
-          </TabsContent>
-        </Tabs>
+        <div className="flex-1 flex flex-col min-h-[500px]">
+          <Tabs
+            defaultValue={settings?.activeTab ?? DEFAULT_SETTINGS.activeTab}
+            className="flex-1 flex flex-col"
+            onValueChange={(value: string) =>
+              handleTabChange(value as TabValue)
+            }
+          >
+            <TabsList className="w-full">
+              <TabsTrigger value="preview" className="flex-1">
+                Preview
+              </TabsTrigger>
+              <TabsTrigger value="code" className="flex-1">
+                HTML Code
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="preview" className="flex-1 mt-0">
+              <div
+                className="prose prose-slate dark:prose-invert max-w-none p-4 border rounded-md h-full overflow-auto bg-white dark:bg-slate-900"
+                dangerouslySetInnerHTML={{ __html: processedHtml }}
+              />
+            </TabsContent>
+            <TabsContent value="code" className="flex-1 mt-0">
+              <Textarea
+                value={processedHtml}
+                readOnly
+                className="h-full font-mono resize-none"
+              />
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
     </div>
   );
