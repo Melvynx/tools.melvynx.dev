@@ -14,10 +14,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Check, Copy, Settings } from "lucide-react";
 import { marked } from "marked";
 import { useState } from "react";
+import { useLocalStorage } from "react-use";
+
+const STORAGE_KEY = "markdown-converter-settings";
 
 interface MarkdownSettings {
   escapeHtml: boolean;
 }
+
+const DEFAULT_SETTINGS: MarkdownSettings = {
+  escapeHtml: true,
+};
 
 function processMarkdown(markdown: string, settings: MarkdownSettings): string {
   const htmlContent = marked(markdown, {
@@ -35,16 +42,24 @@ function processMarkdown(markdown: string, settings: MarkdownSettings): string {
 export function MarkdownConverter() {
   const [markdown, setMarkdown] = useState("");
   const [copied, setCopied] = useState(false);
-  const [settings, setSettings] = useState<MarkdownSettings>({
-    escapeHtml: true,
-  });
+  const [settings, setSettings] = useLocalStorage<MarkdownSettings>(
+    STORAGE_KEY,
+    DEFAULT_SETTINGS
+  );
 
-  const processedHtml = processMarkdown(markdown, settings);
+  const processedHtml = processMarkdown(markdown, settings ?? DEFAULT_SETTINGS);
 
   const copyHtml = () => {
     navigator.clipboard.writeText(processedHtml);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSettingsChange = (escapeHtml: boolean) => {
+    setSettings((prev) => ({
+      ...prev,
+      escapeHtml,
+    }));
   };
 
   return (
@@ -77,10 +92,10 @@ export function MarkdownConverter() {
                     <Label htmlFor="escape-html">Escape HTML Entities</Label>
                     <Switch
                       id="escape-html"
-                      checked={settings.escapeHtml}
-                      onCheckedChange={(escapeHtml) =>
-                        setSettings((prev) => ({ ...prev, escapeHtml }))
+                      checked={
+                        settings?.escapeHtml ?? DEFAULT_SETTINGS.escapeHtml
                       }
+                      onCheckedChange={handleSettingsChange}
                     />
                   </div>
                   <p className="text-sm text-muted-foreground mt-1">

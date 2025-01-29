@@ -3,9 +3,9 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="container">
+    <div className="container flex flex-col gap-4 lg:gap-12">
       <h1 className="text-4xl font-bold">tools.melvynx.dev</h1>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-1 lg:gap-6">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
         <Link href="/markdown-to-html">
           <Card>
             <CardHeader>
