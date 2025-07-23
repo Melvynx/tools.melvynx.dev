@@ -11,7 +11,7 @@ export default function ChromeExtensionsIconPage() {
     <div className="container py-8">
       <h1 className="text-2xl font-bold mb-4">Chrome Extensions Icon Generator</h1>
       <p className="text-muted-foreground mb-6">
-        Upload a 512x512 image and get all required Chrome extension icon sizes (16, 32, 48, 64, 128, 256)
+        Upload any image and get all required Chrome extension icon sizes (16, 32, 48, 64, 128, 256)
       </p>
       <ChromeExtensionsIcon />
     </div>

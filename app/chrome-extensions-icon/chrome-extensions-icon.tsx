@@ -298,14 +298,14 @@ export function ChromeExtensionsIcon() {
               <Upload className="h-12 w-12 text-primary" />
             </div>
             <p className="text-xl font-semibold mb-2">
-              {isDragActive ? "Drop your image here" : "Upload your Chrome extension icon"}
+              {isDragActive ? "Drop your image here" : "Upload your image for Chrome extension"}
             </p>
             <p className="text-muted-foreground mb-2">
-              Drag & drop an image here, or click to browse
+              Drag & drop any image here, or click to browse
             </p>
             <div className="text-sm text-muted-foreground space-y-1">
               <p>• Supports PNG, JPG, GIF, WebP (max 10MB)</p>
-              <p>• Recommended: 512×512 pixels for best quality</p>
+              <p>• Any size accepted - will be automatically resized</p>
               <p>• Generates all required Chrome extension sizes</p>
             </div>
           </div>
