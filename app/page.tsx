@@ -16,6 +16,16 @@ export default function Home() {
             </CardContent>
           </Card>
         </Link>
+        <Link href="/json-formatter">
+          <Card>
+            <CardHeader>
+              <CardTitle>JSON Formatter</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Format and validate JSON</p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </div>
   );
