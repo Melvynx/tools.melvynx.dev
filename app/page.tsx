@@ -36,6 +36,16 @@ export default function Home() {
             </CardContent>
           </Card>
         </Link>
+        <Link href="/nextjs-favicon-generator">
+          <Card>
+            <CardHeader>
+              <CardTitle>Next.js Favicon Generator</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Generate icon.png, favicon.ico, and apple-icon.png for Next.js</p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </div>
   );
