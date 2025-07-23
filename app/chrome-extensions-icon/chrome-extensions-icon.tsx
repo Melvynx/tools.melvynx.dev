@@ -2,7 +2,7 @@
 
 import { useState, useRef, DragEvent, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { Download, Upload, X, ArrowLeft, Image, CheckCircle } from "lucide-react";
+import { Download, Upload, X, ArrowLeft, Image as ImageIcon, CheckCircle } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import JSZip from "jszip";
@@ -152,9 +152,13 @@ export function ChromeExtensionsIcon() {
   };
 
   const canvasToBlob = (canvas: HTMLCanvasElement): Promise<Blob> => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
-        resolve(blob!);
+        if (blob) {
+          resolve(blob);
+        } else {
+          reject(new Error("Failed to create blob from canvas"));
+        }
       }, "image/png", 1.0);
     });
   };
@@ -248,10 +252,10 @@ export function ChromeExtensionsIcon() {
         className={`
           relative border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all duration-200
           ${isDragActive 
-            ? "border-blue-500 bg-blue-50 dark:bg-blue-950/50 scale-[1.02]" 
+            ? "border-primary bg-accent scale-[1.02]" 
             : sourceImage 
-              ? "border-green-500 bg-green-50 dark:bg-green-950/50" 
-              : "border-gray-300 hover:border-gray-400 hover:bg-gray-50 dark:hover:bg-gray-950/50"
+              ? "border-primary bg-accent" 
+              : "border-border hover:border-muted-foreground hover:bg-accent"
           }
         `}
         onDragEnter={handleDragEnter}
@@ -270,36 +274,36 @@ export function ChromeExtensionsIcon() {
         
         {isProcessing ? (
           <div className="flex flex-col items-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4" />
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4" />
             <p className="text-lg font-medium">Processing image...</p>
-            <p className="text-sm text-gray-500 mt-1">Generating all icon sizes</p>
+            <p className="text-sm text-muted-foreground mt-1">Generating all icon sizes</p>
           </div>
         ) : sourceImage ? (
           <div className="flex flex-col items-center">
-            <CheckCircle className="h-16 w-16 text-green-500 mb-4" />
-            <p className="text-xl font-semibold text-green-600 dark:text-green-400 mb-2">
+            <CheckCircle className="h-16 w-16 text-primary mb-4" />
+            <p className="text-xl font-semibold text-foreground mb-2">
               {sourceFileName} uploaded successfully!
             </p>
-            <p className="text-sm text-gray-500 mb-4">
+            <p className="text-sm text-muted-foreground mb-4">
               {CHROME_ICON_SIZES.length} icon sizes generated
             </p>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <Image className="h-4 w-4" />
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <ImageIcon className="h-4 w-4" />
               <span>Click to upload a different image</span>
             </div>
           </div>
         ) : (
           <div className="flex flex-col items-center">
-            <div className="rounded-full bg-blue-100 dark:bg-blue-900 p-6 mb-6">
-              <Upload className="h-12 w-12 text-blue-500" />
+            <div className="rounded-full bg-accent p-6 mb-6">
+              <Upload className="h-12 w-12 text-primary" />
             </div>
             <p className="text-xl font-semibold mb-2">
               {isDragActive ? "Drop your image here" : "Upload your Chrome extension icon"}
             </p>
-            <p className="text-gray-500 mb-2">
+            <p className="text-muted-foreground mb-2">
               Drag & drop an image here, or click to browse
             </p>
-            <div className="text-sm text-gray-400 space-y-1">
+            <div className="text-sm text-muted-foreground space-y-1">
               <p>• Supports PNG, JPG, GIF, WebP (max 10MB)</p>
               <p>• Recommended: 512×512 pixels for best quality</p>
               <p>• Generates all required Chrome extension sizes</p>
@@ -314,7 +318,7 @@ export function ChromeExtensionsIcon() {
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-lg font-semibold">Generated Icons</h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-muted-foreground">
                 Select the icons you want to download ({getSelectedCount()}/{CHROME_ICON_SIZES.length} selected)
               </p>
             </div>
@@ -348,8 +352,8 @@ export function ChromeExtensionsIcon() {
                   className={`
                     relative border-2 rounded-lg p-4 transition-all cursor-pointer
                     ${isSelected 
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-950/50" 
-                      : "border-gray-200 hover:border-gray-300 bg-white dark:bg-gray-900"
+                      ? "border-primary bg-accent" 
+                      : "border-border hover:border-muted-foreground bg-card"
                     }
                   `}
                   onClick={() => toggleIconSelection(iconSize.name)}
@@ -381,7 +385,7 @@ export function ChromeExtensionsIcon() {
                   {/* Icon Info */}
                   <div className="text-center">
                     <p className="font-medium text-sm">{iconSize.size}×{iconSize.size}</p>
-                    <p className="text-xs text-gray-500">{iconSize.name}.png</p>
+                    <p className="text-xs text-muted-foreground">{iconSize.name}.png</p>
                   </div>
                 </div>
               );
