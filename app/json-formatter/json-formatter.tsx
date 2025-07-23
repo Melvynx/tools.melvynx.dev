@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { Check, Copy, Settings } from "lucide-react";
+import { Check, Copy, Settings, ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { useLocalStorage } from "react-use";
 import { toast } from "sonner";
 
@@ -93,7 +94,18 @@ export function JsonFormatter() {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="space-y-6">
+      {/* Header with Back Button */}
+      <div className="flex items-center gap-4">
+        <Link href="/">
+          <Button variant="ghost" size="sm">
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Tools
+          </Button>
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
       <div className="flex flex-col">
         <div className="h-9 mb-2 flex items-center justify-between">
           <h2 className="text-lg font-semibold">JSON Input</h2>
@@ -167,6 +179,7 @@ export function JsonFormatter() {
             </pre>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -26,6 +26,16 @@ export default function Home() {
             </CardContent>
           </Card>
         </Link>
+        <Link href="/chrome-extensions-icon">
+          <Card>
+            <CardHeader>
+              <CardTitle>Chrome Extensions Icon</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Generate all required icon sizes for Chrome extensions</p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </div>
   );

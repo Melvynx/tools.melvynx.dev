@@ -11,7 +11,9 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { Check, Copy, Settings } from "lucide-react";
+import { Check, Copy, Settings, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { marked } from "marked";
 import { useState } from "react";
 import { useLocalStorage } from "react-use";
@@ -76,7 +78,18 @@ export function MarkdownConverter() {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="space-y-6">
+      {/* Header with Back Button */}
+      <div className="flex items-center gap-4">
+        <Link href="/">
+          <Button variant="ghost" size="sm">
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Tools
+          </Button>
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
       <div className="flex flex-col">
         <div className="h-9 mb-2">
           <h2 className="text-lg font-semibold">Markdown</h2>
@@ -171,6 +184,7 @@ export function MarkdownConverter() {
             </TabsContent>
           </Tabs>
         </div>
+      </div>
       </div>
     </div>
   );
