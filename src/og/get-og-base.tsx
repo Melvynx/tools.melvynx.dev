@@ -1,6 +1,5 @@
 import { ImageResponse } from "next/og";
 import type { PropsWithChildren } from "react";
-import { getOgImageFont } from "./get-og-fonts";
 
 export const getOpenGraphBase = async (
   props: PropsWithChildren<{
@@ -18,25 +17,33 @@ export const getOpenGraphBase = async (
           height: "100%",
           display: "flex",
           flexDirection: "column",
-
           position: "relative",
           gap: 16,
-          fontFamily: "Geist",
-
+          fontFamily: "system-ui, sans-serif",
           color: "black",
           backgroundColor: "white",
           opacity: "1",
         }}
       >
         <div
-          tw="flex flex-col justify-start items-start h-full flex-1 px-16 py-24"
-          style={{ gap: 16 }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            height: "100%",
+            flex: 1,
+            padding: "96px 64px",
+            gap: 16,
+          }}
         >
           <p
             style={{
-              fontFamily: "Space Grotesk",
+              fontFamily: "system-ui, sans-serif",
+              fontSize: "48px",
+              fontWeight: "bold",
+              margin: 0,
             }}
-            tw="text-3xl font-bold m-0"
           >
             tools.melvynx.dev
           </p>
@@ -46,10 +53,7 @@ export const getOpenGraphBase = async (
       </div>
     ),
     {
-      // For convenience, we can re-use the exported opengraph-image
-      // size config to also set the ImageResponse's width and height.
       ...props.size,
-      fonts: await getOgImageFont(),
     }
   );
 };

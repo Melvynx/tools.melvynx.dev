@@ -1,6 +1,6 @@
 import { getOpenGraphBase } from "@/og/get-og-base";
 
-export const alt = "Codeline";
+export const alt = "JSON Formatter - Tools Melvynx";
 export const size = {
   width: 1200,
   height: 630,
@@ -11,18 +11,19 @@ export default async function OgImage() {
   return getOpenGraphBase({
     size,
     children: (
-      <div tw="flex flex-col gap-4">
+      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
         <p
           style={{
-            fontFamily: "Space Grotesk",
+            fontFamily: "system-ui, sans-serif",
+            fontSize: "96px",
+            margin: 0,
+            fontWeight: "bold",
           }}
-          tw="text-6xl m-0 mt-0"
         >
           JSON Formatter
         </p>
-        <p className="text-xl">
-          Format and validate JSON with ease. Configure your options and see the
-          result in live.
+        <p style={{ fontSize: "32px", margin: 0, color: "#666" }}>
+          Format and validate JSON with ease
         </p>
       </div>
     ),

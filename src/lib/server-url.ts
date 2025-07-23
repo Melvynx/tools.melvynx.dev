@@ -3,5 +3,5 @@ export const getServerUrl = () => {
     return "http://localhost:3000";
   }
 
-  return "https://codelynx.dev";
+  return "https://tools.melvynx.dev";
 };
