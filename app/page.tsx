@@ -46,6 +46,26 @@ export default function Home() {
             </CardContent>
           </Card>
         </Link>
+        <Link href="/comparison-table">
+          <Card>
+            <CardHeader>
+              <CardTitle>Comparison Table</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Create customizable comparison tables with ratings</p>
+            </CardContent>
+          </Card>
+        </Link>
+        <Link href="/timezone-checker">
+          <Card>
+            <CardHeader>
+              <CardTitle>Timezone Checker</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Compare timezones and find overlapping awake hours</p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </div>
   );
