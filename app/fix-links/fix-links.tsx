@@ -31,11 +31,16 @@ export function FixLinks() {
   };
 
   const handleOpen = () => {
-    if (!fixed.trim()) {
+    const trimmed = fixed.trim();
+    if (!trimmed) {
       toast.error("No link to open");
       return;
     }
-    window.open(fixed, "_blank");
+    if (!/^https?:\/\//i.test(trimmed)) {
+      toast.error("Only http/https links are supported");
+      return;
+    }
+    window.open(trimmed, "_blank");
   };
 
   const handleOutputClick = () => {
