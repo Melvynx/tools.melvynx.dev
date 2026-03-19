@@ -66,6 +66,16 @@ export default function Home() {
             </CardContent>
           </Card>
         </Link>
+        <Link href="/fix-links">
+          <Card>
+            <CardHeader>
+              <CardTitle>Fix Links</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Fix broken links copied from terminal</p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </div>
   );
