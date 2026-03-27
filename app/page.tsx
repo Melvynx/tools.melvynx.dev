@@ -76,6 +76,16 @@ export default function Home() {
             </CardContent>
           </Card>
         </Link>
+        <Link href="/random-number">
+          <Card>
+            <CardHeader>
+              <CardTitle>Random Number Generator</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Generate random numbers with customizable range</p>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     </div>
   );
